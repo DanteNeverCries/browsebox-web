@@ -40,7 +40,7 @@ const CreateAd2 = () => {
     const sendImage = (listingid) => {
         const formData = new FormData();
         // formData.append('type', 'listing');
-        formData.append('id', listingid);
+        formData.append('id', randomId());
         formData.append('image', image);
         formData.append('index', 1)
         // alert (listingingid.values.salesId+" "+FormData.id);
@@ -69,6 +69,11 @@ const CreateAd2 = () => {
 
                 console.log(res);
             })
+    }
+
+    //  5 digit number genorator
+    const randomId = () => {
+        return Math.floor(10000 + Math.random() * 90000);
     }
 
     // This is when it is changed or better yet just before it is submitted
@@ -123,9 +128,10 @@ const CreateAd2 = () => {
                         //
                         if (image != null) {
                             sendImage(res.data.sale_id);
+
                         }
                         // The following 2 lines were commented out
-                        updateImageInMainDatabase(res.data[0].sale_id);
+                        // updateImageInMainDatabase(res.data[0].sale_id);
                         values.image = image;
 
 
@@ -138,7 +144,8 @@ const CreateAd2 = () => {
 
                     } else Promise.reject();
                 })
-                .catch((err) => alert(`Something went wrong: ${err.message}`));
+                // .catch((err) => alert(`Something went wrong: ${err.message}`));
+                .catch((err) => console.log(err));
         },
     });
 
